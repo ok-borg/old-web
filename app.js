@@ -43,12 +43,16 @@ app.factory('Session', function($http, $cookies, $q, $window) {
 				user = rsp.data;
                 cb(user);
             };
+            var ecb = function() {
+                that.setToken('')
+                cb({})
+            }
             if (!user || !user.Id) {
 				var token = this.getToken();
                 $http({
 					method: 'GET',
 			        url: url + '/v1/user?token=' + token,
-				}).then(scb);
+				}).then(scb, ecb);
             } else {
                 cb(user);
             }
