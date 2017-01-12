@@ -45,6 +45,7 @@ app.factory('Session', function($http, $cookies, $q, $window) {
             };
             var ecb = function() {
                 that.setToken('')
+                $window.location.reload();
                 cb({})
             }
             if (!user || !user.Id) {
